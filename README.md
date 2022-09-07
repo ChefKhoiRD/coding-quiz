@@ -24,11 +24,24 @@ WHEN the game is over
 THEN I can save my initials and my score
 ```
 
-### Begin
+## Walkthrough
 
+### You are presented with this page when you start
+
+<br />
+
+![readmescreenshots](./photos/Screenshot_3.png?raw=true "start page")
+
+### Then you press start and you are presented with
+
+![readmescreenshots](./photos/Screenshot_1.png?raw=true "quiz page")
+
+<br />
+
+### When you answer a question you move to the next
 ```
-You are presented with this page when you start
+When you answer incorrectly you lose 5 seconds
+When you answer correctly, you lose no time
 
-![first page seen, with title and start button.](/assets/photos/Screenshot_3.png)
-
+When time runs out or all questions are answered, the game is over
 ```
