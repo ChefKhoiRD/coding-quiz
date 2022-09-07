@@ -6,6 +6,8 @@ const c = document.getElementById('c+');
 const submit = document.getElementById('submit');
 const timerDisplay = document.getElementById('timerDisplay');
 const answer = document.querySelectorAll('.answer');
+const startButton = document.getElementById('start-btn');
+const quiz = document.getElementById('quiz-app');
 
 // creating quiz questions
 const quizQuestions = [
@@ -37,6 +39,8 @@ let i = 0;
 let score = 0;
 let time;
 
+
+
 // get answer
 function getAnswer() {
     answer.forEach((el) => {
@@ -63,7 +67,7 @@ function getQuiz() {
     c.innerText = quizQuestions[i].c;
 };
 
-// move forwards
+// move forwards when question is answered
 function startQuiz() {
     submit.addEventListener('click', () => {
         let ans = getAnswer();
@@ -72,7 +76,7 @@ function startQuiz() {
                 score++;
             }
         }
-        i++;
+    i++;
         if (i < quizQuestions.length) {
             getQuiz();
         } else {
@@ -81,30 +85,39 @@ function startQuiz() {
     });
 };
 
-// time remaining
-(function() {
-    let sec = 60;
-    function startTimer() {
-        console.log('timer go');
-        const timer = setInterval(function(){
-            sec--;
-            timerDisplay.innerText = "00:" + sec;
-            if (sec < 0) {
-            alert ("Time is up, Score: " + score + " Out of 3")
-        }
+// time remaining and subtract 5 seconds when given an incorrect answer
+let sec = 60;
+function startTimer() {
+    const timer = setInterval(function(){
+        sec--;
+        timerDisplay.innerText = "00:" + sec;
+        if (sec < 0) {
+        alert ("Time is up, Score: " + score + " Out of 3")
+            }
         }, 1000);
-        }
-        submit.addEventListener('click', function() {
+    }
+    submit.addEventListener('click', function() {
         let ans = getAnswer();
         if (ans) {
             if (ans !== quizQuestions[i].correct) {
                 sec -= 5;
                 timerDisplay.innerText = "00:" + sec; 
-            }
         }
-    });
-    startTimer();
-})();
+    }
+});
 
-getQuiz();
-startQuiz();
+// Hide quiz until start button is clicked
+function hideGame() {
+    quiz.style.display = "block";
+}
+
+// start game
+function startGame() {
+    hideGame();
+    startTimer();
+    getQuiz();
+    startQuiz();
+}
+
+// Start button runs start game function
+startButton.addEventListener("click", startGame);
